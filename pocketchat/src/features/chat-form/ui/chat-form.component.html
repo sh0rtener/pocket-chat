@@ -9,7 +9,10 @@
         </p>
       </div>
     }
-    <app-chat-history [(messages)]="models"></app-chat-history>
+    <app-chat-history [messages]="models() ?? []"></app-chat-history>
+  </div>
+  <div class="loading" [class.disable]="!isLoading">
+    <p>чат думает</p>
   </div>
   <div class="chat__interactive">
     <form class="user_message" [formGroup]="chatForm" (ngSubmit)="onSubmit()">

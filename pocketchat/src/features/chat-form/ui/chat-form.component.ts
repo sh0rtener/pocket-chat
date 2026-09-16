@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, model, ViewChild } from '@angular/core';
 import { Message } from '../../../entities/message';
 import { ChatHistoryComponent } from '../../../widgets/chat-history';
 import { TextareaComponent, PrimaryButtonComponent } from '../../../shared/ui';
@@ -14,6 +14,7 @@ import { LlmService } from '../../../shared/lib/api/llm.service';
 })
 export class ChatFormComponent implements AfterViewInit {
   private llmService = inject(LlmService);
+  isLoading = false;
 
   ngAfterViewInit(): void {
     this.scrollToBottom();
@@ -32,6 +33,7 @@ export class ChatFormComponent implements AfterViewInit {
       this.onSubmit();
     }
   }
+  models = model<Message[]>();
 
   onSubmit() {
     if (this.chatForm.invalid) {
@@ -39,23 +41,40 @@ export class ChatFormComponent implements AfterViewInit {
       return;
     }
 
-    console.log(this.chatForm.controls.file);
+    this.models.update((x) => [
+      ...(x ?? []),
+      {
+        id: 1,
+        text: this.chatForm.controls.message.value!,
+        isAnswer: false,
+        createdAt: new Date(),
+      },
+    ]);
 
-    this.models.push({
-      id: 1,
-      text: this.chatForm.controls.message.value!,
-      isAnswer: false,
-      createdAt: new Date(),
-    });
+    this.isLoading = true;
+    // await new Promise(resolve => setTimeout(resolve, 5000))
+    console.log(1);
 
     this.llmService.AskQuestion(this.chatForm.controls.message.value!).subscribe({
       next: (x) => {
-        this.models.push({
-          id: 1,
-          text: x.message,
-          isAnswer: true,
-          createdAt: new Date(),
-        });
+        console.log(x);
+
+        this.models.update((message) => [
+          ...(message ?? []),
+          {
+            id: 1,
+            text: x.message,
+            isAnswer: true,
+            createdAt: new Date(),
+          },
+        ]);
+
+        console.log(x);
+        this.isLoading = false;
+        console.log(x);
+      },
+      error: (e: Error) => {
+        console.log(e);
       },
     });
 
@@ -64,6 +83,4 @@ export class ChatFormComponent implements AfterViewInit {
     this.chatForm.controls.message.reset();
     this.chatForm.controls.file.reset();
   }
-
-  models: Message[] = [];
 }

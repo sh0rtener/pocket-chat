@@ -14,7 +14,7 @@ export class LlmService {
         // Здесь маппинг из LmStudioResponse в LlmResponse
         // Подставь реальные поля твоего интерфейса LlmResponse
         return {
-          message: lmResponse.choises[0].message.content,
+          message: lmResponse.output[0].content,
         } as LlmResponse;
       }),
     );

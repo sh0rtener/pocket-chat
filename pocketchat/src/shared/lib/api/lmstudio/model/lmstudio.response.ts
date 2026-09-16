@@ -1,9 +1,10 @@
 export interface LmStudioResponse {
-  id: string;
-  object: string;
-  created: number;
-  model: string;
-  choises: LmStudioChoisesResponse[];
+  // id: string;
+  // object: string;
+  // created: number;
+  // model: string;
+  model_intance_id: string;
+  output: LmStudioMessageResponse[];
 }
 
 export interface LmStudioChoisesResponse {
@@ -12,6 +13,6 @@ export interface LmStudioChoisesResponse {
 }
 
 export interface LmStudioMessageResponse {
-  role: string;
+  type: string;
   content: string;
 }
