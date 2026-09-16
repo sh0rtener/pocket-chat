@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Message } from '../../../entities/message';
 import { ChatHistoryComponent } from '../../../widgets/chat-history';
 import { TextareaComponent, PrimaryButtonComponent } from '../../../shared/ui';
 import { createChatFormGroup } from '../model/chat-form.form';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LlmService } from '../../../shared/lib/api/llm.service';
 
 @Component({
   selector: 'app-chat-form',
@@ -12,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [ChatHistoryComponent, TextareaComponent, PrimaryButtonComponent, ReactiveFormsModule],
 })
 export class ChatFormComponent implements AfterViewInit {
+  private llmService = inject(LlmService);
+
   ngAfterViewInit(): void {
     this.scrollToBottom();
   }
@@ -45,11 +48,15 @@ export class ChatFormComponent implements AfterViewInit {
       createdAt: new Date(),
     });
 
-    this.models.push({
-      id: 1,
-      text: '*а ты не бойся пизды* я тебе *дам* _ща_',
-      isAnswer: true,
-      createdAt: new Date(),
+    this.llmService.AskQuestion(this.chatForm.controls.message.value!).subscribe({
+      next: (x) => {
+        this.models.push({
+          id: 1,
+          text: x.message,
+          isAnswer: true,
+          createdAt: new Date(),
+        });
+      },
     });
 
     setTimeout(() => this.scrollToBottom(), 0);
