@@ -1,0 +1,19 @@
+@use './variables' as *;
+
+.header {
+  display: flex;
+  background: $background-secondary;
+  align-items: center;
+  justify-content: space-between;
+  padding: $padding-topbottom $padding-leftright;
+  width: 99vw;
+  height: 50px;
+  border-bottom: $thin-px solid $color-secondary;
+  font-size: $h3-px;
+
+  span {
+    b {
+      color: $background-main;
+    }
+  }
+}

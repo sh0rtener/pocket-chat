@@ -1,0 +1,22 @@
+<div class="textarea">
+  @if (label()) {
+    <label [for]="id()">
+      {{ label() }}
+    </label>
+  }
+
+  <textarea
+    [id]="id()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onTouched()"
+  >
+  </textarea>
+  @if (control()?.invalid && control()?.touched) {
+    <span class="error">
+      {{ errorMessage() }}
+    </span>
+  }
+</div>

@@ -1,0 +1,29 @@
+@use 'variables' as *;
+@use 'fonts' as *;
+
+.input {
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    gap: 5px;
+
+    label {
+        font-weight: bold;
+    }
+
+    input {
+        border: none;
+        background: $background-secondary;
+        padding: $padding-topbottom $padding-leftright;
+        border-radius: $border-radius;
+        color: $color-primary;
+        font-family: $font-family;
+        font-size: 18px;
+    }
+
+    .error {
+        color: $color-error;
+        font-size: 10px;
+        margin: 0;
+    }
+}

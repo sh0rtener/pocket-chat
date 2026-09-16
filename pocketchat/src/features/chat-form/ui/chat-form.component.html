@@ -1,0 +1,33 @@
+<div class="chat">
+  <div class="chat__content" #scrollBlock>
+    @if (models.length == 0) {
+      <div class="chat__content-empty">
+        <b>Добрый день!</b>
+        <p>
+          Я - ИИ-ассистент. Можете задать мне любые вопросы касательно работы, а я постараюсь на них
+          ответить :)
+        </p>
+      </div>
+    }
+    <app-chat-history [(messages)]="models"></app-chat-history>
+  </div>
+  <hr />
+  <div class="chat__interactive">
+    <form class="user_message" [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+      <app-textarea
+        id="user_message"
+        placeholder="Напишите сообщение..."
+        formControlName="message"
+        [control]="chatForm.controls.message"
+        (keydown)="onKeydown($event)"
+      ></app-textarea>
+      <div class="pin-file">
+        <input type="file" id="file-upload" class="sr-only" accept="*/*" formControlName="file" />
+        <label for="file-upload" class="upload-trigger">
+          <span class="plus-icon">+</span>
+        </label>
+      </div>
+      <app-button buttonType="submit">Отправить</app-button>
+    </form>
+  </div>
+</div>

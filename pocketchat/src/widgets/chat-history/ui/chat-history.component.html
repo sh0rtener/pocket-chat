@@ -1,0 +1,13 @@
+<div class="chat-history">
+  @for (message of messages(); track message.id) {
+      @if (message.isAnswer) {
+        <div class="message left">
+          <app-message-card [message]="message"></app-message-card>
+        </div>
+      } @else {
+        <div class="message right">
+          <app-message-card [message]="message"></app-message-card>
+        </div>
+      }
+  }
+</div>

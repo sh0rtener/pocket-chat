@@ -1,0 +1,43 @@
+@use 'variables' as *;
+@use 'fonts' as *;
+
+button {
+  padding: 1em 3.5em;
+  border: none;
+  font-weight: 600;
+  font-family: $font-family;
+  border-radius: 25px;
+  transition: 0.2s ease-in;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.primary {
+  background: $background-main;
+  color: $background-primary;
+}
+
+.alternative {
+  background: $background-secondary;
+  color: $color-primary;
+}
+
+.error {
+  background: $color-error;
+  color: $color-primary;
+}
+
+.primary:hover {
+  background: $background-primary;
+  color: $color-primary;
+}
+
+.alternative:hover {
+  background: $background-primary;
+  color: $color-primary;
+}
+
+.error:hover {
+  background: $background-primary;
+  color: $color-primary;
+}

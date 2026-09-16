@@ -1,0 +1,19 @@
+@use 'variables' as *;
+
+.message {
+  padding: $padding-topbottom $padding-leftright;
+  border-radius: $border-radius;
+
+  .message__content {
+    overflow-wrap: break-word;
+  }
+}
+
+.isAnswer {
+  background: $background-secondary;
+}
+
+.isQuestion {
+  background: $background-main;
+  color: $background-primary;
+}

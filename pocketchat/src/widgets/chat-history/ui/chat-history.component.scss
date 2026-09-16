@@ -1,0 +1,21 @@
+@use 'variables' as *;
+
+.chat-history {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+
+  .message {
+    margin: $padding-topbottom $padding-topbottom 0 0;
+    max-width: 80%;
+    width: fit-content;
+
+    &.left {
+      align-self: flex-start;
+    }
+
+    &.right {
+      align-self: flex-end;
+    }
+  }
+}

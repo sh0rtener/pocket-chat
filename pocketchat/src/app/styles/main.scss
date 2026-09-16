@@ -1,0 +1,9 @@
+@use './variables' as *;
+@use './fonts' as *;
+
+body {
+  margin: 0;
+  border-style: border-box;
+  font-family: $font-family;
+  font-size: $font-size;
+}

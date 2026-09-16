@@ -1,0 +1,7 @@
+<div class="message" [class.isAnswer]="message().isAnswer" [class.isQuestion]="!message().isAnswer">
+  <div class="message__content">
+    <p>
+        {{ message().text }}
+    </p>
+  </div>
+</div>
