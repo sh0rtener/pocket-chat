@@ -1,5 +1,5 @@
 <div class="message" [class.isAnswer]="message().isAnswer" [class.isQuestion]="!message().isAnswer">
-  <div class="message__content">
+  <div class="message__content" markdown [data]="message().text">
     <p>
         {{ message().text }}
     </p>

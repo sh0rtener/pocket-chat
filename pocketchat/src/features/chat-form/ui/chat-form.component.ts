@@ -47,7 +47,7 @@ export class ChatFormComponent implements AfterViewInit {
 
     this.models.push({
       id: 1,
-      text: 'ПОШЕЛ НАХУЙ КОМУ СКАЗАЛ',
+      text: '*а ты не бойся пизды* я тебе *дам* _ща_',
       isAnswer: true,
       createdAt: new Date(),
     });
