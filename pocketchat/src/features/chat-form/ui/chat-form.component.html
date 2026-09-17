@@ -11,8 +11,10 @@
     }
     <app-chat-history [messages]="models() ?? []"></app-chat-history>
   </div>
-  <div class="loading" [class.disable]="!isLoading">
-    <p>чат думает</p>
+  <div class="loading" [class.disable]="!isLoading" [class.loading-enable]="isLoading">
+    <p>Ожидание ответа от ИИ...</p>
+    <!-- <span class="loader"></span> -->
+    <span class="loader2"></span>
   </div>
   <div class="chat__interactive">
     <form class="user_message" [formGroup]="chatForm" (ngSubmit)="onSubmit()">

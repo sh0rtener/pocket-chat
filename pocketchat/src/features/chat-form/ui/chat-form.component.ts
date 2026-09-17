@@ -35,7 +35,13 @@ export class ChatFormComponent implements AfterViewInit {
   }
   models = model<Message[]>();
 
-  onSubmit() {
+  async onSubmit() {
+    const msg = this.chatForm.get('message')?.value;
+    const file = this.chatForm.get('file')?.value;
+    if (!msg && !file) {
+      return;
+    }
+
     if (this.chatForm.invalid) {
       this.chatForm.markAllAsTouched();
       return;
@@ -52,8 +58,7 @@ export class ChatFormComponent implements AfterViewInit {
     ]);
 
     this.isLoading = true;
-    // await new Promise(resolve => setTimeout(resolve, 5000))
-    console.log(1);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     this.llmService.AskQuestion(this.chatForm.controls.message.value!).subscribe({
       next: (x) => {

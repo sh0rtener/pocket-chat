@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { LmStudioResponse } from './model/lmstudio.response';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -21,11 +21,8 @@ export class LmStudioApiService {
 
   // public AskQuestion(question: string): Observable<LmStudioResponse> {
   //   return of({
-  //     id: 'test',
-  //     object: 'string',
-  //     created: 123,
-  //     model: 'terst',
-  //     choises: [{ index: 123, message: { role: 'asdf', content: question } }],
+  //     model_intance_id: 'test',
+  //     output: [{ type: 'test', content: question }],
   //   });
   // }
 }

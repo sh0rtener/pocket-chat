@@ -1,7 +1,10 @@
 <div class="message" [class.isAnswer]="message().isAnswer" [class.isQuestion]="!message().isAnswer">
   <div class="message__content" markdown [data]="message().text">
-    <p>
-        {{ message().text }}
+    <p class="message__content-text">
+      {{ message().text }}
     </p>
   </div>
 </div>
+<p class="message__date">
+  {{ message().createdAt | date: 'yyyy-MM-dd, hh:mm:ss' }}
+</p>
