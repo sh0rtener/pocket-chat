@@ -58,6 +58,8 @@ export class ChatFormComponent implements AfterViewInit {
         text: this.chatForm.controls.message.value!,
         isAnswer: false,
         createdAt: new Date(),
+        file: file ?? undefined,
+        fileUrl: file ? URL.createObjectURL(file) : undefined,
       },
     ]);
 
@@ -66,7 +68,6 @@ export class ChatFormComponent implements AfterViewInit {
 
     this.llmService.AskQuestion(msg, base64File).subscribe({
       next: (x) => {
-
         this.models.update((message) => [
           ...(message ?? []),
           {

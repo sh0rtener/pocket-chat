@@ -29,7 +29,8 @@ export class LmStudioApiService {
     const model = {
       model: 'qwen/qwen3-vl-4b',
       input: [
-        textJson, fileJson
+        ...(textJson ? [textJson] : []),
+        ...(fileJson ? [fileJson] : [])
       ],
       context_length: 8000,
       temperature: 0,

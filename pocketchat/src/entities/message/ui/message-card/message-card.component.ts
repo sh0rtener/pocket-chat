@@ -7,9 +7,9 @@ import { DatePipe } from '@angular/common';
   selector: 'app-message-card',
   templateUrl: './message-card.component.html',
   styleUrl: './message-card.component.scss',
-  imports: [MarkdownModule, DatePipe]
+  imports: [MarkdownModule, DatePipe],
 })
 export class MessageComponent {
-    message = model.required<Message>()
-    
+  message = model.required<Message>();
+  
 }

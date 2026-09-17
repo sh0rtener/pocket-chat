@@ -4,6 +4,21 @@
       {{ message().text }}
     </p>
   </div>
+  @if (message().file) {
+    <div class="message__file">
+      <span class="message__file-name">
+        {{ message().file!.name }}
+      </span>
+
+      <a
+        class="message__file-download"
+        [href]="message().fileUrl"
+        [download]="message().file!.name"
+      >
+        Скачать
+      </a>
+    </div>
+  }
 </div>
 <p class="message__date">
   {{ message().createdAt | date: 'yyyy-MM-dd, hh:mm:ss' }}
