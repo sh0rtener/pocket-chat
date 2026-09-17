@@ -96,6 +96,15 @@
   justify-content: flex-start;
 }
 
+.error__text {
+  color: $color-error;
+  font-style: italic;
+}
+
+.error-enable {
+  display: block;
+}
+
 .loader {
   --color-1: #000;
   --color-2: #00b3bf;

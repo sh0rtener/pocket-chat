@@ -16,6 +16,7 @@ import { fileToBase64 } from '../../../shared/lib/base64-encoder.service';
 export class ChatFormComponent implements AfterViewInit {
   private llmService = inject(LlmService);
   isLoading = false;
+  hasServerError = model(false);
 
   ngAfterViewInit(): void {
     this.scrollToBottom();
@@ -39,7 +40,7 @@ export class ChatFormComponent implements AfterViewInit {
   async onSubmit() {
     const msg = this.chatForm.get('message')?.value;
     const file = this.chatForm.get('file')?.value;
-    if (!msg && !file) {
+    if (!msg && !file || this.isLoading) {
       return;
     }
     var base64File;
@@ -64,7 +65,8 @@ export class ChatFormComponent implements AfterViewInit {
     ]);
 
     this.isLoading = true;
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    this.hasServerError.update(() => false);
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
 
     this.llmService.AskQuestion(msg, base64File).subscribe({
       next: (x) => {
@@ -81,7 +83,10 @@ export class ChatFormComponent implements AfterViewInit {
         this.isLoading = false;
       },
       error: (e: Error) => {
+        this.hasServerError.update(() => true);
+        this.isLoading = false;
         console.log(e);
+        console.log(this.hasServerError);
       },
     });
 

@@ -16,6 +16,11 @@
     <!-- <span class="loader"></span> -->
     <span class="loader2"></span>
   </div>
+  @if (hasServerError()) {
+    <div class="error">
+      <p class="error__text">Произошла ошибка на стороне сервера. Обратитесь к администратору</p>
+    </div>
+  }
   <div class="chat__interactive">
     <form class="user_message" [formGroup]="chatForm" (ngSubmit)="onSubmit()">
       <app-textarea
