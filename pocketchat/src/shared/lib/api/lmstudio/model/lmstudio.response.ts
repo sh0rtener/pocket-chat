@@ -14,5 +14,6 @@ export interface LmStudioChoisesResponse {
 
 export interface LmStudioMessageResponse {
   type: string;
-  content: string;
+  content: string | null;
+  data_url: string | null;
 }

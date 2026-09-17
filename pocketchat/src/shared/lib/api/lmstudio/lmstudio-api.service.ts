@@ -8,10 +8,29 @@ import { Observable, of } from 'rxjs';
 export class LmStudioApiService {
   private http = inject(HttpClient);
 
-  public AskQuestion(question: string): Observable<LmStudioResponse> {
+  public AskQuestion(question: string | null| undefined, base64File: string | null): Observable<LmStudioResponse> {
+    var textJson = null;
+    var fileJson = null;
+
+    if (question) {
+      textJson = {
+        type: "text",
+        content: question
+      }
+    }
+    
+    if (base64File) {
+      fileJson = {
+        type: "image",
+        data_url: base64File
+      }
+    }
+
     const model = {
       model: 'qwen/qwen3-vl-4b',
-      input: question,
+      input: [
+        textJson, fileJson
+      ],
       context_length: 8000,
       temperature: 0,
     };

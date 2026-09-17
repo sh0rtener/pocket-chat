@@ -5,6 +5,7 @@ import { TextareaComponent, PrimaryButtonComponent } from '../../../shared/ui';
 import { createChatFormGroup } from '../model/chat-form.form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LlmService } from '../../../shared/lib/api/llm.service';
+import { fileToBase64 } from '../../../shared/lib/base64-encoder.service';
 
 @Component({
   selector: 'app-chat-form',
@@ -41,6 +42,9 @@ export class ChatFormComponent implements AfterViewInit {
     if (!msg && !file) {
       return;
     }
+    var base64File;
+    if (file) base64File = await fileToBase64(file!);
+    else base64File = null;
 
     if (this.chatForm.invalid) {
       this.chatForm.markAllAsTouched();
@@ -60,9 +64,8 @@ export class ChatFormComponent implements AfterViewInit {
     this.isLoading = true;
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
-    this.llmService.AskQuestion(this.chatForm.controls.message.value!).subscribe({
+    this.llmService.AskQuestion(msg, base64File).subscribe({
       next: (x) => {
-        console.log(x);
 
         this.models.update((message) => [
           ...(message ?? []),
@@ -74,9 +77,7 @@ export class ChatFormComponent implements AfterViewInit {
           },
         ]);
 
-        console.log(x);
         this.isLoading = false;
-        console.log(x);
       },
       error: (e: Error) => {
         console.log(e);
@@ -87,5 +88,12 @@ export class ChatFormComponent implements AfterViewInit {
 
     this.chatForm.controls.message.reset();
     this.chatForm.controls.file.reset();
+  }
+
+  onFileSelected(e: Event) {
+    const input = e?.target as HTMLInputElement;
+    const file = input.files?.[0] ?? null;
+
+    this.chatForm.patchValue({ file: file });
   }
 }

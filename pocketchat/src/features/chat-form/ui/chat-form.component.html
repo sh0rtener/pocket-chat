@@ -26,7 +26,13 @@
         (keydown)="onKeydown($event)"
       ></app-textarea>
       <div class="pin-file">
-        <input type="file" id="file-upload" class="sr-only" accept="*/*" formControlName="file" />
+        <input
+          type="file"
+          id="file-upload"
+          class="sr-only"
+          accept="*/*"
+          (change)="onFileSelected($event)"
+        />
         <label for="file-upload" class="upload-trigger">
           <span class="plus-icon">+</span>
         </label>

@@ -8,8 +8,8 @@ import { map, Observable } from 'rxjs';
 export class LlmService {
   private llmApiService = inject(LmStudioApiService);
 
-  public AskQuestion(question: string): Observable<LlmResponse> {
-    return this.llmApiService.AskQuestion(question).pipe(
+  public AskQuestion(question: string | null | undefined, base64File: string | null): Observable<LlmResponse> {
+    return this.llmApiService.AskQuestion(question, base64File).pipe(
       map((lmResponse) => {
         // Здесь маппинг из LmStudioResponse в LlmResponse
         // Подставь реальные поля твоего интерфейса LlmResponse
